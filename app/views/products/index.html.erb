@@ -1,7 +1,7 @@
 <h1>Products</h1>
 
 <%= link_to "New product", new_product_path %>
-
+<%= button_to "Log out", session_path, method: :delete if authenticated? %>
 <h1 class="text-3xl font-bold text-blue-600">Welcome</h1>
 <div id="products">
   <% @products.each do |product| %>
