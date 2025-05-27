@@ -1,0 +1,15 @@
+<h1>Products</h1>
+
+<%= link_to "New product", new_product_path %>
+
+<h1 class="text-3xl font-bold text-blue-600">Welcome</h1>
+<div id="products">
+  <% @products.each do |product| %>
+    <div>
+      <%= link_to product.name, product %>
+    </div>
+  <% end %>
+</div>
+<div class="p-4 bg-green-200 text-green-900 font-bold">
+  Tailwind is working!
+</div>
