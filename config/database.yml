@@ -1,0 +1,38 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV["RAILS_DB_POOL"] || ENV['RAILS_MAX_THREADS'] || 5 %>
+  idle_timeout: <%= ENV["RAILS_IDLE_CONNECTION"] ||  60 %>
+  port: <%= ENV['RAILS_DATABASE_PORT'] || 5432 %>
+  host: localhost
+  username: postgres
+  password: postgres
+
+
+development:
+  <<: *default
+  database: store_development
+
+test:
+  <<: *default
+  database: store_test
+
+production:
+  primary: &primary_production
+    <<: *default
+    database: store_production
+    username: store
+    password: <%= ENV["STORE_DATABASE_PASSWORD"] %>
+  cache:
+    <<: *primary_production
+    database: store_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: store_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: store_production_cable
+    migrations_paths: db/cable_migrate
+
